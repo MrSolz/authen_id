@@ -26,6 +26,15 @@ jobs:
           architecture: x64
       - run: flutter pub get
       - run: flutter clean
+      - run: |
+          cd packages/jesus && touch .env && echo APP_NAME=UboxDev > .env &&
+          echo API_URL=API_URL=https://heracles.gobizdev.com/api >> .env &&
+          echo API_LOGIN_URL="https://heracles.gobizdev.com/login"  >> .env && 
+          echo API_LOGOUT_URL=https://heracles.gobizdev.com/confirm_logout  >> .env &&
+          echo ANDROID_APP_ID=com.ordermanagement  >> .env &&
+          echo ANDROID_APP_VERSION_NAME=${{ github.event.inputs.version_name }}  >> .env &&
+          echo ANDROID_APP_VERSION_CODE=${{ github.event.inputs.version_code }}  >> .env && 
+          cat .env && ls
       - run: flutter build ios --release --no-codesign
 
   build_appbundle:
@@ -43,5 +52,14 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter clean
+      - run: |
+          cd packages/jesus && touch .env && echo APP_NAME=UboxDev > .env &&
+          echo API_URL=API_URL=https://heracles.gobizdev.com/api >> .env &&
+          echo API_LOGIN_URL="https://heracles.gobizdev.com/login"  >> .env && 
+          echo API_LOGOUT_URL=https://heracles.gobizdev.com/confirm_logout  >> .env &&
+          echo ANDROID_APP_ID=com.ordermanagement  >> .env &&
+          echo ANDROID_APP_VERSION_NAME=${{ github.event.inputs.version_name }}  >> .env &&
+          echo ANDROID_APP_VERSION_CODE=${{ github.event.inputs.version_code }}  >> .env && 
+          cat .env && ls
       - run: flutter build apk --flavor dev
       - run: flutter build appbundle --flavor dev
