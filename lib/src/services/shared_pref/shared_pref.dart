@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String HAS_USED = 'has_used';
