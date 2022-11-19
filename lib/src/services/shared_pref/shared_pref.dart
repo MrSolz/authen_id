@@ -6,7 +6,6 @@ const String HAS_USED = 'has_used';
 const String AUTH_TOKEN = 'auth_token';
 const String CONFIG_LANG = 'config_lang';
 
-// ignore: avoid_classes_with_only_static_members
 class SharedPref {
   static late SharedPreferences _sharedPref;
 
