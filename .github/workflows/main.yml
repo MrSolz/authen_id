@@ -27,11 +27,11 @@ jobs:
       - run: flutter pub get
       - run: flutter clean
       - run: |
-          cd packages/jesus && touch .env && echo APP_NAME=UboxDev > .env &&
+          touch .env && echo APP_NAME=AuthenMe > .env &&
           echo API_URL=API_URL=https://heracles.gobizdev.com/api >> .env &&
           echo API_LOGIN_URL="https://heracles.gobizdev.com/login"  >> .env && 
           echo API_LOGOUT_URL=https://heracles.gobizdev.com/confirm_logout  >> .env &&
-          echo ANDROID_APP_ID=com.ordermanagement  >> .env &&
+          echo ANDROID_APP_ID=vx.authen.me  >> .env &&
           echo ANDROID_APP_VERSION_NAME=${{ github.event.inputs.version_name }}  >> .env &&
           echo ANDROID_APP_VERSION_CODE=${{ github.event.inputs.version_code }}  >> .env && 
           cat .env && ls
@@ -53,11 +53,11 @@ jobs:
       - run: flutter pub get
       - run: flutter clean
       - run: |
-          cd packages/jesus && touch .env && echo APP_NAME=UboxDev > .env &&
+          touch .env && echo APP_NAME=AuthenMe > .env &&
           echo API_URL=API_URL=https://heracles.gobizdev.com/api >> .env &&
           echo API_LOGIN_URL="https://heracles.gobizdev.com/login"  >> .env && 
           echo API_LOGOUT_URL=https://heracles.gobizdev.com/confirm_logout  >> .env &&
-          echo ANDROID_APP_ID=com.ordermanagement  >> .env &&
+          echo ANDROID_APP_ID=vx.authen.me  >> .env &&
           echo ANDROID_APP_VERSION_NAME=${{ github.event.inputs.version_name }}  >> .env &&
           echo ANDROID_APP_VERSION_CODE=${{ github.event.inputs.version_code }}  >> .env && 
           cat .env && ls
