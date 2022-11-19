@@ -1,30 +1,36 @@
-name: CI Build
+name: CI
 on:
   workflow_dispatch:
     inputs:
-        version_name:
-          required: true
-          description: Nhập version name (ví dụ 1.0.0)
-          default: 1.0.0 # To trigger manual build
-        version_code:
-          required: true
-          description: Nhập version code (ví dụ 1)
-          default: 1 # To trigger manual build
-          
+      description: Nhập version name (ví dụ 1.0.0)
+      default: 1.0.0 # To trigger manual build     version_name:
+
 jobs:
+  flutter_test:
+    name: Run flutter test and analyze
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v2
+        with:
+          java-version: "11"
+          distribution: 'zulu'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          flutter-version: '3.3.8'
+      - run: flutter pub get
+      - run: flutter analyze
+
   build_ios:
     name: Build Flutter (iOS)
     runs-on: macos-latest
-    needs: [flutter_test]
     steps:
       - uses: actions/checkout@v3
-    - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          architecture: x64
-      - uses: subosito/flutter-action@v1
+      - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
+          architecture: x64
       - run: flutter pub get
       - run: flutter clean
       - run: flutter build ios --release --no-codesign
@@ -32,17 +38,16 @@ jobs:
   build_appbundle:
     name: Build Flutter (Android)
     runs-on: ubuntu-latest
-    needs: [flutter_test]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v2
         with:
-          distribution: 'zulu'
+          jdistribution: "zulu"
           java-version: '11'
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
-          flutter-version: '3.3.8'
       - run: flutter pub get
       - run: flutter clean
+      - run: flutter build apk
       - run: flutter build appbundle
