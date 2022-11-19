@@ -1,9 +1,18 @@
-name: CI
+name: CI Build
+
 on:
   workflow_dispatch:
     inputs:
-      description: Nhập version name (ví dụ 1.0.0)
-      default: 1.0.0 # To trigger manual build     version_name:
+        version_name:
+          required: true
+          description: Nhập version name (ví dụ 1.0.0)
+          default: 1.0.0 # To trigger manual build
+        version_code:
+          required: true
+          description: Nhập version code (ví dụ 1)
+          default: 1 # To trigger manual build
+  release:
+    types: [published] # only run the workflow when a new release has been published
 
 jobs:
   flutter_test:
